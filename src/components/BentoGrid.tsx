@@ -1,41 +1,43 @@
 import { motion } from 'framer-motion';
 import { Github, Linkedin, Mail, MapPin, Layers, ArrowRight, Terminal, GitBranch, Phone } from 'lucide-react';
+import { useCallback, useRef } from 'react';
+import { GitHubCalendar } from 'react-github-calendar';
 
 /* ─── GitHub-style contribution grid (simulated) ─── */
-function ContributionGrid() {
-  const weeks = 26;
-  const days = 7;
+// function ContributionGrid() {
+//   const weeks = 26;
+//   const days = 7;
 
-  const seed = (w: number, d: number) => {
-    const v = Math.sin(w * 13.7 + d * 7.3 + w * d * 0.4) * 43758.5453;
-    return v - Math.floor(v);
-  };
+//   const seed = (w: number, d: number) => {
+//     const v = Math.sin(w * 13.7 + d * 7.3 + w * d * 0.4) * 43758.5453;
+//     return v - Math.floor(v);
+//   };
 
-  const levelColor = (l: number) => {
-    const colors = ['rgba(255,255,255,0.04)', 'rgba(79,255,176,0.2)', 'rgba(79,255,176,0.45)', 'rgba(79,255,176,0.7)', '#4fffb0'];
-    return colors[l];
-  };
+//   const levelColor = (l: number) => {
+//     const colors = ['rgba(255,255,255,0.04)', 'rgba(79,255,176,0.2)', 'rgba(79,255,176,0.45)', 'rgba(79,255,176,0.7)', '#4fffb0'];
+//     return colors[l];
+//   };
 
-  return (
-    <div className="flex gap-[3px]">
-      {Array.from({ length: weeks }).map((_, w) => (
-        <div key={w} className="flex flex-col gap-[3px]">
-          {Array.from({ length: days }).map((_, d) => {
-            const r = seed(w, d);
-            const level = r < 0.35 ? 0 : r < 0.55 ? 1 : r < 0.72 ? 2 : r < 0.87 ? 3 : 4;
-            return (
-              <div
-                key={d}
-                className="w-2.5 h-2.5 rounded-sm"
-                style={{ background: levelColor(level) }}
-              />
-            );
-          })}
-        </div>
-      ))}
-    </div>
-  );
-}
+//   return (
+//     <div className="flex gap-[3px]">
+//       {Array.from({ length: weeks }).map((_, w) => (
+//         <div key={w} className="flex flex-col gap-[3px]">
+//           {Array.from({ length: days }).map((_, d) => {
+//             const r = seed(w, d);
+//             const level = r < 0.35 ? 0 : r < 0.55 ? 1 : r < 0.72 ? 2 : r < 0.87 ? 3 : 4;
+//             return (
+//               <div
+//                 key={d}
+//                 className="w-2.5 h-2.5 rounded-sm"
+//                 style={{ background: levelColor(level) }}
+//               />
+//             );
+//           })}
+//         </div>
+//       ))}
+//     </div>
+//   );
+// }
 
 /* ─── Tech stack mini icons ─── */
 const techItems = [
@@ -59,6 +61,152 @@ const containerVariants = {
   visible: { transition: { staggerChildren: 0.07 } },
 };
 
+// function MapInitializer() {
+//   const initialized = useRef(false);
+
+//   const initMap = useCallback((node: HTMLDivElement | null) => {
+//     if (!node || initialized.current) return;
+//     initialized.current = true;
+
+//     // Load Leaflet CSS
+//     if (!document.getElementById('leaflet-css')) {
+//       const link = document.createElement('link');
+//       link.id = 'leaflet-css';
+//       link.rel = 'stylesheet';
+//       link.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+//       document.head.appendChild(link);
+//     }
+
+//     // Load Leaflet JS then init map
+//     if (!(window as any).L) {
+//       const script = document.createElement('script');
+//       script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+//       script.onload = () => setupMap();
+//       document.head.appendChild(script);
+//     } else {
+//       setupMap();
+//     }
+
+//     function setupMap() {
+//       const L = (window as any).L;
+//       const mapEl = document.getElementById('casablanca-map');
+//       if (!mapEl || (mapEl as any)._leaflet_id) return;
+
+//       const map = L.map('casablanca-map', {
+//         center: [33.5928, -7.6192],
+//         zoom: 13,
+//         zoomControl: true,
+      
+//         attributionControl: false,
+//         scrollWheelZoom: false,
+//         dragging: false,
+//       });
+
+//       // Dark tile layer (CartoDB dark matter)
+//       L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+//         maxZoom: 19,
+//       }).addTo(map);
+//     }
+//   }, []);
+
+//   return <div ref={initMap} style={{ display: 'none' }} />;
+// }
+function CasablancaMap() {
+  const initialized = useRef(false);
+
+  const init = useCallback((node: HTMLDivElement | null) => {
+    if (!node || initialized.current) return;
+    initialized.current = true;
+
+    if (!document.getElementById('leaflet-css')) {
+      const link = document.createElement('link');
+      link.id = 'leaflet-css';
+      link.rel = 'stylesheet';
+      link.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+      document.head.appendChild(link);
+    }
+
+    const boot = () => {
+      const L = (window as any).L;
+      const el = document.getElementById('casablanca-map');
+      if (!el || (el as any)._leaflet_id) return;
+
+      const map = L.map('casablanca-map', {
+        center: [33.5928, -7.6192],
+        zoom: 13,
+        zoomControl: false,
+        attributionControl: false,
+        scrollWheelZoom: false,
+        dragging: false,
+      });
+
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        maxZoom: 19,
+      }).addTo(map);
+
+      // Zoom control bottom-right
+     // Zoom OUT — bottom left
+      const zoomOut = L.Control.extend({
+        options: { position: 'bottomleft' },
+        onAdd: () => {
+          const btn = L.DomUtil.create('button');
+          btn.innerHTML = '−';
+          btn.style.cssText = `
+            width: 36px; height: 36px; border-radius: 50%;
+            background: rgba(0,0,0,0.85); border: 1px solid rgba(255,255,255,0.15);
+            color: white; font-size: 20px; line-height: 1;
+            cursor: pointer; backdrop-filter: blur(8px);
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 16px; margin-left: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+          `;
+          L.DomEvent.on(btn, 'click', (e) => {
+            L.DomEvent.stopPropagation(e);
+            map.zoomOut();
+          });
+          return btn;
+        },
+      });
+
+      // Zoom IN — bottom right
+      const zoomIn = L.Control.extend({
+        options: { position: 'bottomright' },
+        onAdd: () => {
+          const btn = L.DomUtil.create('button');
+          btn.innerHTML = '+';
+          btn.style.cssText = `
+            width: 36px; height: 36px; border-radius: 50%;
+            background: rgba(0,0,0,0.85); border: 1px solid rgba(255,255,255,0.15);
+            color: white; font-size: 20px; line-height: 1;
+            cursor: pointer; backdrop-filter: blur(8px);
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 16px; margin-right: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+          `;
+          L.DomEvent.on(btn, 'click', (e) => {
+            L.DomEvent.stopPropagation(e);
+            map.zoomIn();
+          });
+          return btn;
+        },
+      });
+
+      new zoomOut().addTo(map);
+      new zoomIn().addTo(map);
+    };
+
+    if (!(window as any).L) {
+      const script = document.createElement('script');
+      script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+      script.onload = boot;
+      document.head.appendChild(script);
+    } else {
+      boot();
+    }
+  }, []);
+
+  return <div ref={init} style={{ display: 'none' }} />;
+}
 export default function BentoGrid() {
   return (
     <section id="bento" className="relative py-24">
@@ -87,62 +235,99 @@ export default function BentoGrid() {
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[minmax(140px,auto)]"
         >
           {/* Card 1: Location — spans 2 cols */}
-          <motion.div
-            variants={cardVariants}
-            whileHover={{ scale: 1.01, y: -2 }}
-            transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-            className="relative rounded-3xl overflow-hidden sm:col-span-2 row-span-2"
-            style={{
-              background: 'rgba(255,255,255,0.03)',
-              border: '1px solid rgba(255,255,255,0.07)',
-              minHeight: '280px',
-            }}
-          >
-            {/* Map-style bg */}
-            <div
-              className="absolute inset-0"
-              style={{
-                background: `
-                  linear-gradient(rgba(9,9,9,0.3) 1px, transparent 1px),
-                  linear-gradient(90deg, rgba(9,9,9,0.3) 1px, transparent 1px),
-                  radial-gradient(ellipse at 50% 50%, rgba(0,100,160,0.25) 0%, rgba(9,9,9,0.8) 70%)
-                `,
-                backgroundSize: '28px 28px, 28px 28px, 100% 100%',
-              }}
-            />
-            <div className="absolute inset-0 flex flex-col justify-between p-6">
-              {/* Location badge */}
-              <div
-                className="self-start flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium"
-                style={{ background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.12)', backdropFilter: 'blur(8px)', color: '#ddd' }}
-              >
-                <MapPin size={12} style={{ color: '#4fffb0' }} />
-                Location
-              </div>
+        <motion.div
+  variants={cardVariants}
+  whileHover={{ scale: 1.01, y: -2 }}
+  transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+  className="relative rounded-3xl overflow-hidden sm:col-span-2 row-span-2"
+  style={{
+    border: '1px solid rgba(255,255,255,0.07)',
+    minHeight: '280px',
+  }}
+>
+  {/* Leaflet map — lowest layer */}
+  <div
+    id="casablanca-map"
+    className="absolute inset-0 w-full h-full"
+    style={{ zIndex: 1 }}
+  />
 
-              {/* Center pin */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="relative">
-                  <motion.div
-                    animate={{ scale: [1, 1.6, 1], opacity: [0.4, 0, 0.4] }}
-                    transition={{ duration: 2.5, repeat: Infinity, ease: 'easeOut' }}
-                    className="absolute inset-0 rounded-full"
-                    style={{ background: 'rgba(79,255,176,0.3)', width: 40, height: 40, margin: -10 }}
-                  />
-                  <div
-                    className="w-5 h-5 rounded-full border-2"
-                    style={{ background: '#4fffb0', borderColor: 'rgba(9,9,9,0.8)' }}
-                  />
-                </div>
-              </div>
+  {/* Vignette */}
+  <div
+    className="absolute inset-0 pointer-events-none"
+    style={{
+      zIndex: 10,
+      background: 'radial-gradient(ellipse at 50% 50%, transparent 25%, rgba(9,9,9,0.6) 100%)',
+    }}
+  />
 
-              {/* City label */}
-              <div>
-                <p className="font-display text-2xl font-bold text-white">Casablanca</p>
-                <p className="text-sm text-gray-400 mt-0.5">Morocco · GMT+1</p>
-              </div>
-            </div>
-          </motion.div>
+  {/* UI layer */}
+  <div
+    className="absolute inset-0 flex flex-col justify-between p-6"
+    style={{ zIndex: 20, pointerEvents: 'none' }}
+  >
+    {/* Location badge — top left */}
+    <div
+      className="self-start flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium"
+      style={{
+        background: 'rgba(0,0,0,0.75)',
+        border: '1px solid rgba(255,255,255,0.15)',
+        backdropFilter: 'blur(8px)',
+        WebkitBackdropFilter: 'blur(8px)',
+        color: '#ddd',
+        pointerEvents: 'auto',
+        zIndex: 30,
+      }}
+    >
+      <MapPin size={12} style={{ color: '#4fffb0' }} />
+      Location
+    </div>
+
+    {/* Pulse marker — center */}
+    <div
+      className="absolute inset-0 flex items-center justify-center"
+      style={{ pointerEvents: 'none' }}
+    >
+      <div className="relative flex items-center justify-center">
+        {/* Outer ring */}
+        <motion.div
+          animate={{ scale: [1, 2.4, 1], opacity: [0.45, 0, 0.45] }}
+          transition={{ duration: 2.5, repeat: Infinity, ease: 'easeOut' }}
+          className="absolute rounded-full"
+          style={{ background: 'rgba(79,255,176,0.3)', width: 52, height: 52 }}
+        />
+        {/* Inner ring */}
+        <motion.div
+          animate={{ scale: [1, 1.8, 1], opacity: [0.5, 0, 0.5] }}
+          transition={{ duration: 2.5, repeat: Infinity, ease: 'easeOut', delay: 0.4 }}
+          className="absolute rounded-full"
+          style={{ background: 'rgba(79,255,176,0.25)', width: 36, height: 36 }}
+        />
+        {/* Center dot */}
+        <div
+          style={{
+            width: 16,
+            height: 16,
+            borderRadius: '50%',
+            background: '#4fffb0',
+            border: '2.5px solid rgba(9,9,9,0.9)',
+            boxShadow: '0 0 16px rgba(79,255,176,0.8), 0 0 32px rgba(79,255,176,0.4)',
+            position: 'relative',
+            zIndex: 10,
+          }}
+        />
+      </div>
+    </div>
+
+    {/* City label — bottom left */}
+    <div>
+      <p className="font-display text-2xl font-bold text-white">Casablanca</p>
+      <p className="text-sm text-gray-400 mt-0.5">Morocco · GMT+1</p>
+    </div>
+  </div>
+
+  <CasablancaMap />
+</motion.div>
 
           {/* Card 2: Featured project */}
           <motion.div
@@ -189,7 +374,7 @@ export default function BentoGrid() {
               </div>
               <div>
                 <p className="font-display font-bold text-white text-lg">Open to work</p>
-                <p className="text-xs text-gray-500 mt-1">Available from July 2025</p>
+                <p className="text-xs text-gray-500 mt-1">Available from July 2026</p>
               </div>
             </div>
           </motion.div>
@@ -201,7 +386,7 @@ export default function BentoGrid() {
           >
             {[
               { icon: Github, href: 'https://github.com/mustapha-moutaki', color: '#ffffff', bg: 'rgba(255,255,255,0.05)', border: 'rgba(255,255,255,0.1)', glow: 'rgba(255,255,255,0.15)' },
-              { icon: Linkedin, href: 'https://linkedin.com/in/mustapha-moutaki', color: '#0a66c2', bg: 'rgba(10,102,194,0.08)', border: 'rgba(10,102,194,0.2)', glow: 'rgba(10,102,194,0.25)' },
+              { icon: Linkedin, href: 'https://www.linkedin.com/in/mustapha-moutaki-6528a2242/', color: '#0a66c2', bg: 'rgba(10,102,194,0.08)', border: 'rgba(10,102,194,0.2)', glow: 'rgba(10,102,194,0.25)' },
               { icon: Mail, href: 'mailto:mustaphaamoutaki@gmail.com', color: '#4fffb0', bg: 'rgba(79,255,176,0.06)', border: 'rgba(79,255,176,0.15)', glow: 'rgba(79,255,176,0.2)' },
               { icon: Phone, href: 'tel:+212650744504', color: '#f97316', bg: 'rgba(249,115,22,0.06)', border: 'rgba(249,115,22,0.15)', glow: 'rgba(249,115,22,0.2)' },
             ].map(({ icon: Icon, href, color, bg, border, glow }) => (
@@ -247,30 +432,57 @@ export default function BentoGrid() {
 
           {/* Card 6: GitHub activity — spans 2 cols */}
           <motion.div
-            variants={cardVariants}
-            whileHover={{ scale: 1.01, y: -2 }}
-            transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-            className="rounded-3xl p-6 sm:col-span-2"
-            style={{
-              background: 'rgba(255,255,255,0.03)',
-              border: '1px solid rgba(255,255,255,0.07)',
-            }}
-          >
-            <div className="flex items-center gap-2 mb-5">
-              <div
-                className="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium"
-                style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#aaa' }}
-              >
-                <Github size={12} />
-                Github activity
-              </div>
-              <span className="text-xs text-gray-500 ml-auto">200+ contributions in the last year</span>
-            </div>
-            <div className="overflow-x-auto">
-              <ContributionGrid />
-            </div>
-            <p className="text-xs text-gray-600 mt-4">Last pushed on {new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })}</p>
-          </motion.div>
+  variants={cardVariants}
+  whileHover={{ scale: 1.01, y: -2 }}
+  transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+  className="rounded-3xl p-6 sm:col-span-2"
+  style={{
+    background: 'rgba(255,255,255,0.03)',
+    border: '1px solid rgba(255,255,255,0.07)',
+  }}
+>
+  <div className="flex items-center gap-2 mb-5">
+    <div
+      className="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium"
+      style={{
+        background: 'rgba(255,255,255,0.05)',
+        border: '1px solid rgba(255,255,255,0.1)',
+        color: '#aaa',
+      }}
+    >
+      <Github size={12} />
+      GitHub activity
+    </div>
+
+    <span className="text-xs text-gray-500 ml-auto">
+      @mustapha-moutaki
+    </span>
+  </div>
+
+  <div className="overflow-x-auto">
+    <div className="min-w-max">
+      <GitHubCalendar
+        username="mustapha-moutaki"
+        blockSize={12}
+        blockMargin={4}
+        fontSize={12}
+        theme={{
+          dark: [
+            'rgba(255,255,255,0.04)',
+            'rgba(79,255,176,0.2)',
+            'rgba(79,255,176,0.45)',
+            'rgba(79,255,176,0.7)',
+            '#4fffb0',
+          ],
+        }}
+      />
+    </div>
+  </div>
+
+  <p className="text-xs text-gray-600 mt-4">
+    Live contribution activity from GitHub
+  </p>
+</motion.div>
 
           {/* Card 7: Tech stack — spans 2 cols */}
           <motion.div
@@ -308,7 +520,7 @@ export default function BentoGrid() {
             </div>
             <div>
               <p className="font-display font-semibold text-white text-sm">Tech stacks I'm familiar with</p>
-              <p className="text-xs text-gray-500 mt-1">Primarily focused on Java/Spring & Angular ecosystem,<br />but always eager to explore and learn new technologies.</p>
+              <p className="text-xs text-gray-500 mt-1">Primarily focused on Java/Spring & React/Angular ecosystem,<br />but always eager to explore and learn new technologies.</p>
             </div>
           </motion.div>
 

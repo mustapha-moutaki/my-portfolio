@@ -1,6 +1,8 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { Briefcase, ArrowUpRight } from 'lucide-react';
+// Assuming ScrollReveal is in the same directory or adjust the path accordingly
+import ScrollReveal from './ScrollReveal';
 
 const experiences = [
   {
@@ -49,30 +51,47 @@ export default function Experience() {
 
   return (
     <section id="experience" className="relative py-32">
+      {/* Background Glow */}
       <div
         className="absolute bottom-0 left-0 w-96 h-96 rounded-full opacity-10 pointer-events-none"
         style={{ background: 'radial-gradient(ellipse, rgba(0,212,255,0.4) 0%, transparent 70%)', filter: 'blur(80px)' }}
       />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-          className="mb-16"
-        >
-          <div className="section-divider mb-4" />
-          <span className="text-xs font-semibold tracking-[0.2em] uppercase" style={{ color: '#4fffb0' }}>
-            Career
-          </span>
-          <h2 className="font-display text-4xl lg:text-5xl font-bold text-white mt-3">
+        <div className="mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <div className="section-divider mb-4" />
+            <span className="text-xs font-semibold tracking-[0.2em] uppercase" style={{ color: '#4fffb0' }}>
+              Career
+            </span>
+          </motion.div>
+
+          {/* Title with GSAP Scroll Reveal */}
+          <ScrollReveal
+            baseOpacity={0}
+            baseRotation={0}
+            blurStrength={10}
+            containerClassName="!my-0"
+            textClassName="font-display text-4xl lg:text-5xl font-bold text-white mt-3 !leading-[1.1]"
+          >
             Work experience
-          </h2>
-          <p className="text-gray-400 mt-4 max-w-xl">
+          </ScrollReveal>
+
+          {/* Description with GSAP Scroll Reveal */}
+          <ScrollReveal
+            baseOpacity={0.2}
+            baseRotation={2}
+            blurStrength={5}
+            containerClassName="!my-2"
+            textClassName="text-gray-400 text-lg max-w-xl !leading-relaxed"
+          >
             Building real-world software solutions across enterprise and startup environments.
-          </p>
-        </motion.div>
+          </ScrollReveal>
+        </div>
 
         <motion.div
           ref={ref}
@@ -122,6 +141,7 @@ export default function Experience() {
                     boxShadow: '0 4px 24px rgba(0,0,0,0.2)',
                   }}
                 >
+                  {/* ... Rest of your card content remains exactly the same ... */}
                   <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-6">
                     <div className="flex items-start gap-4">
                       <div
@@ -154,7 +174,6 @@ export default function Experience() {
                     </div>
                   </div>
 
-                  {/* Description */}
                   <ul className="space-y-2.5 mb-6">
                     {exp.description.map((item, j) => (
                       <li key={j} className="flex items-start gap-3 text-gray-400 text-sm leading-relaxed">
@@ -167,7 +186,6 @@ export default function Experience() {
                     ))}
                   </ul>
 
-                  {/* Tags */}
                   <div className="flex flex-wrap gap-2">
                     {exp.tags.map((tag) => (
                       <span
@@ -184,7 +202,6 @@ export default function Experience() {
                     ))}
                   </div>
 
-                  {/* Arrow */}
                   <div className="absolute top-8 right-8 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                     <ArrowUpRight size={16} style={{ color: exp.accent }} />
                   </div>

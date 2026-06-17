@@ -2,10 +2,12 @@ import { useRef, useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { Github, Linkedin, Mail, ArrowDown, Phone } from 'lucide-react';
 import TrueFocus from './TrueFocus';
+;
+import ShinyText from './ShinyText';
 
 const socialLinks = [
   { icon: Github, label: 'GitHub', href: 'https://github.com/mustapha-moutaki' },
-  { icon: Linkedin, label: 'LinkedIn', href: 'https://linkedin.com/in/mustapha-moutaki' },
+  { icon: Linkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/in/mustapha-moutaki-6528a2242/' },
   { icon: Phone, label: 'Phone', href: 'tel:+212650744504' },
   { icon: Mail, label: 'Email', href: 'mailto:mustaphaamoutaki@gmail.com' },
 ];
@@ -37,15 +39,16 @@ function HeroImage() {
     setReveal(prev => ({ ...prev, active: false }));
   }, []);
 
-  const revealRadius = reveal.active ? 30 : 0;
+  const revealRadius = reveal.active ? 20 : 0;
 
   return (
     <div
       ref={containerRef}
-      className="relative w-64 h-72 lg:w-full lg:h-[500px] rounded-[2rem] overflow-hidden cursor-none mx-auto lg:mx-0"
+      className="relative w-64 h-72 lg:w-full lg:h-[500px] rounded-[2rem] overflow-hidden cursor-none mx-auto lg:mx-0 bg-none"
       style={{ 
-        border: '1px solid rgba(255,255,255,0.1)',
-        boxShadow: '0 20px 50px rgba(0,0,0,0.3)' 
+        // border: '1px solid rgba(255,255,255,0.1)',
+        // boxShadow: '0 20px 50px rgba(0,0,0,0.3)' ,
+        // background: "none",
       }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
@@ -64,8 +67,9 @@ function HeroImage() {
         style={{
           clipPath: `circle(${revealRadius}% at ${reveal.x}% ${reveal.y}%)`,
           transition: reveal.active
-            ? 'clip-path 0.05s linear'
+            ? 'clip-path 0.1s left 0.1s, opacity 0.3s ease'
             : 'clip-path 0.6s cubic-bezier(0.22, 1, 0.36, 1)',
+            // 'clip-path 0.6s cubic-bezier(0.22, 1, 0.36, 1)'
         }}
       >
         <img
@@ -96,6 +100,7 @@ function HeroImage() {
     </div>
   );
 }
+
 
 export default function Hero() {
   const scrollToAbout = () => {
@@ -176,9 +181,19 @@ export default function Hero() {
               variants={itemVariants}
               className="text-lg sm:text-xl text-gray-400 leading-relaxed max-w-xl mb-12"
             >
-              Specializing in Java Spring Boot and Angular, I build scalable RESTful APIs
-              and enterprise web applications. Passionate about clean architecture and
-              delivering high-impact software solutions.
+              <ShinyText
+  text="Hey there! Nice to see you here. If you're a friend, I hope you're doing well. If you're looking to hire a passionate software engineer, you've come to the right place. Take your time, check out my work, and don't forget to reach out—I'd love to connect with you!
+"
+  speed={3}
+  delay={1}
+  color="#b5b5b5"
+  shineColor="#ffffff"
+  spread={120}
+  direction="left"
+  yoyo={false}
+  pauseOnHover={false}
+  disabled={false}
+/>
             </motion.p>
 
             <motion.div variants={itemVariants} className="flex items-center gap-3 flex-wrap">

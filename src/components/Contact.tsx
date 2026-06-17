@@ -17,7 +17,7 @@ const socials = [
     icon: Linkedin,
     label: 'LinkedIn',
     handle: 'linkedin.com/in/mustapha-moutaki',
-    href: 'https://linkedin.com/in/mustapha-moutaki',
+    href: 'https://www.linkedin.com/in/mustapha-moutaki-6528a2242/',
     color: '#0a66c2',
     bg: 'rgba(10,102,194,0.08)',
     border: 'rgba(10,102,194,0.2)',

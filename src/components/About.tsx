@@ -246,7 +246,7 @@ export default function About() {
   const inView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section ref={ref} className="relative py-24 lg:py-32 overflow-hidden">
+    <section ref={ref} className="relative py-24 lg:py-32 overflow-hidden" id="about">
       {/* Integration of Crosshair */}
       <Crosshair containerRef={ref} color="rgba(13, 219, 243, 0.5)" />
 

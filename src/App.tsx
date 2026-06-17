@@ -49,6 +49,8 @@ export default function App() {
           transition={{ duration: 0.4 }}
         >
           <Navbar />
+        
+          
           <main>
             <Hero />
             <div style={{ background: 'linear-gradient(to bottom, #090909 0%, #0d0d0d 100%)' }}>

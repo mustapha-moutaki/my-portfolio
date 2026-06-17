@@ -4,11 +4,30 @@ export default {
   theme: {
     extend: {
       colors: {
+        // Shadcn / System mappings
+        border: "oklch(var(--border) / <alpha-value>)",
+        input: "oklch(var(--input) / <alpha-value>)",
+        ring: "oklch(var(--ring) / <alpha-value>)",
+        background: "oklch(var(--background) / <alpha-value>)",
+        foreground: "oklch(var(--foreground) / <alpha-value>)",
+        primary: {
+          DEFAULT: "oklch(var(--primary) / <alpha-value>)",
+          foreground: "oklch(var(--primary-foreground) / <alpha-value>)",
+        },
+        secondary: {
+          DEFAULT: "oklch(var(--secondary) / <alpha-value>)",
+          foreground: "oklch(var(--secondary-foreground) / <alpha-value>)",
+        },
+        accent: {
+          DEFAULT: "oklch(var(--accent) / <alpha-value>)",
+          foreground: "oklch(var(--accent-foreground) / <alpha-value>)",
+        },
+        // Your custom brand colors
         bg: '#090909',
         surface: '#111111',
         'surface-2': '#1a1a1a',
-        accent: '#4fffb0',
-        'accent-2': '#00d4ff',
+        'brand-accent': '#4fffb0',
+        'brand-accent-2': '#00d4ff',
       },
       fontFamily: {
         display: ['Syne', 'sans-serif'],

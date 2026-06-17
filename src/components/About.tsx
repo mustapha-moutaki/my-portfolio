@@ -165,10 +165,10 @@ const Crosshair: React.FC<CrosshairProps> = ({ color = 'white', containerRef = {
 
 /* ─── Existing Data ─── */
 const stats = [
-  { value: '1+', label: 'Year experience' },
-  { value: '3+', label: 'Projects shipped' },
-  { value: '5', label: 'Certifications' },
-  { value: '3', label: 'Languages spoken' },
+  { value: '3+', label: 'Year experience' },
+  { value: '21+', label: 'Projects shipped' },
+  { value: '5+', label: 'Certifications' },
+  { value: '4', label: 'Languages spoken' },
 ];
 
 const highlights = [
@@ -266,17 +266,24 @@ export default function About() {
               <motion.div whileHover={{ scale: 1.02 }} transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}>
                 <ProfileImage />
               </motion.div>
-              <motion.div initial={{ opacity: 0, x: 20 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ delay: 0.4, duration: 0.6 }} className="absolute -right-6 top-8 glass rounded-2xl p-4 min-w-[140px]" style={{ boxShadow: '0 8px 32px rgba(0,0,0,0.5)' }}>
+              <motion.div initial={{ opacity: 0, x: 20 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ delay: 0.4, duration: 0.6 }} className="absolute -right-6 top-8 glass rounded-2xl p-4 min-w-[140px] pointer-events-none select-none" style={{ boxShadow: '0 8px 32px rgba(0,0,0,0.5)' }}>
                 <div className="flex items-center gap-2 mb-1">
                   <div className="w-2 h-2 rounded-full pulse-glow" style={{ background: '#4fffb0' }} />
-                  <span className="text-xs text-gray-400">Status</span>
+                  <span className="text-xs text-gray-400">First solve</span>
                 </div>
-                <p className="text-sm font-semibold text-white">Open to work</p>
+                <p className="text-sm font-semibold text-white"> the problem</p>
               </motion.div>
-              <motion.div initial={{ opacity: 0, x: -20 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ delay: 0.5, duration: 0.6 }} className="absolute -left-6 bottom-12 glass rounded-2xl p-4" style={{ boxShadow: '0 8px 32px rgba(0,0,0,0.5)' }}>
-                <p className="text-2xl font-display font-bold text-gradient-accent">Java</p>
-                <p className="text-xs text-gray-400 mt-0.5">Spring Boot<br />specialist</p>
-              </motion.div>
+              <motion.div 
+  initial={{ opacity: 0, x: -20 }} 
+  animate={inView ? { opacity: 1, x: 0 } : {}} 
+  transition={{ delay: 0.5, duration: 0.6 }} 
+
+  className="absolute -left-6 bottom-12 glass rounded-2xl p-4 pointer-events-none select-none" 
+  style={{ boxShadow: '0 8px 32px rgba(0,0,0,0.5)' }}
+>
+  <p className="text-2xl font-display font-bold text-gradient-accent">Then</p>
+  <p className="text-xs text-gray-400 mt-0.5">Write the <br />code</p>
+</motion.div>
             </div>
           </motion.div>
 

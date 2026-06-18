@@ -81,7 +81,7 @@ className="fixed bottom-8 left-0 right-0 z-50 flex justify-center"    >
              <motion.button
   onClick={() => {
     if (item.id === 'cv') {
-      window.open('https://collection.cloudinary.com/df1wxfrxu/1eb8ad7ff646104e255ed937cca35c26', '_blank');
+      window.open('https://collection.cloudinary.com/df1wxfrxu/ecfeb2b6688417e0a272cb0973630d39', '_blank');
     } else {
       scrollTo(item.id);
     }

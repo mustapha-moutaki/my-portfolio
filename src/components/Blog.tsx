@@ -1,50 +1,8 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { ArrowRight, PenLine } from 'lucide-react';
-
-const posts = [
-  {
-    id: 1,
-    date: 'June 10, 2025',
-    readTime: '6 min read',
-    title: 'Building Scalable REST APIs with Spring Boot and JWT',
-    excerpt: 'A deep dive into designing and securing RESTful APIs using Spring Boot, Spring Security, and JSON Web Tokens for enterprise applications.',
-    image: 'https://images.pexels.com/photos/1181263/pexels-photo-1181263.jpeg?auto=compress&cs=tinysrgb&w=400',
-    tags: ['java', 'spring-boot', 'jwt'],
-    accent: '#4fffb0',
-  },
-  {
-    id: 2,
-    date: 'May 22, 2025',
-    readTime: '4 min read',
-    title: 'Angular State Management: RxJS vs NgRx',
-    excerpt: 'Comparing reactive state management approaches in Angular applications — when to use RxJS subjects directly versus adopting a full NgRx store.',
-    image: 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=400',
-    tags: ['angular', 'rxjs', 'ngrx'],
-    accent: '#dd0031',
-  },
-  {
-    id: 3,
-    date: 'May 5, 2025',
-    readTime: '5 min read',
-    title: 'Docker & CI/CD for Spring Boot Applications',
-    excerpt: 'Step-by-step guide to containerizing Spring Boot apps with Docker and setting up automated pipelines with Jenkins for continuous delivery.',
-    image: 'https://images.pexels.com/photos/577585/pexels-photo-577585.jpeg?auto=compress&cs=tinysrgb&w=400',
-    tags: ['docker', 'devops', 'cicd'],
-    accent: '#2496ed',
-  },
-  {
-    id: 4,
-    date: 'April 18, 2025',
-    readTime: '3 min read',
-    title: 'Clean Architecture in Java: Structuring Your Spring Boot Project',
-    excerpt: 'How to structure a Spring Boot project following clean architecture principles — separating domain logic from infrastructure concerns for long-term maintainability.',
-    image: 'https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=400',
-    tags: ['java', 'architecture', 'patterns'],
-    accent: '#f89820',
-  },
-];
-
+import { posts } from '../data/BlogsData';
+import { Link } from 'react-router-dom';
 const containerVariants = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.1 } },
@@ -93,8 +51,14 @@ export default function Blog() {
                 overcoming challenges, and sharing lessons learned along the way.
               </p>
             </div>
+
+             <Link 
+              to={`/blogs/`} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="block"
+            >
             <motion.a
-              href="#"
               whileHover={{ scale: 1.03, boxShadow: '0 8px 24px rgba(0,0,0,0.3)' }}
               whileTap={{ scale: 0.98 }}
               transition={{ type: 'spring', stiffness: 400, damping: 20 }}
@@ -104,9 +68,11 @@ export default function Blog() {
                 border: '1px solid rgba(255,255,255,0.12)',
               }}
             >
+             
               View all articles
               <ArrowRight size={14} strokeWidth={2.5} />
             </motion.a>
+            </Link>
           </div>
         </motion.div>
 
@@ -131,7 +97,7 @@ export default function Blog() {
                 {/* Thumbnail */}
                 <div className="flex-shrink-0 w-full sm:w-44 h-32 sm:h-28 rounded-2xl overflow-hidden">
                   <motion.img
-                    src={post.image}
+                    src={post.coverImage}
                     alt={post.title}
                     className="w-full h-full object-cover"
                     whileHover={{ scale: 1.06 }}
@@ -162,6 +128,12 @@ export default function Blog() {
 
                   {/* Footer */}
                   <div className="flex items-center justify-between mt-4">
+                    <Link
+                    to={`/blogs/${post.slug}`}
+                     target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="block"
+                    >
                     <motion.div
                       className="flex items-center gap-2 text-sm font-medium"
                       style={{ color: '#4fffb0' }}
@@ -171,21 +143,17 @@ export default function Blog() {
                       Read more
                       <ArrowRight size={13} strokeWidth={2.5} />
                     </motion.div>
+                    </Link>
                     <div className="flex gap-2">
-                      {post.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="px-2.5 py-1 rounded-lg text-xs font-medium"
-                          style={{
-                            background: 'rgba(255,255,255,0.04)',
-                            border: '1px solid rgba(255,255,255,0.08)',
-                            color: 'rgba(255,255,255,0.4)',
-                          }}
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
+                    {post.tags && post.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="px-2.5 py-1 rounded-lg text-xs font-medium"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                   </div>
                 </div>
               </motion.div>

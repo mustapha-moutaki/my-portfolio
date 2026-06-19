@@ -3,6 +3,7 @@ import { motion, useInView } from 'framer-motion';
 import { Send, Github, Linkedin, Mail, MapPin, Phone } from 'lucide-react';
 import emailjs from "@emailjs/browser";
 import toast from 'react-hot-toast';
+import { Turnstile } from "@marsidev/react-turnstile";
 
 const socials = [
   {
@@ -80,11 +81,20 @@ export default function Contact() {
 
   const formRef = useRef<HTMLFormElement | null>(null);
   
+  // add i'm not a robot cloudflare
+  const [turnstileToken, setTurnstileToken] = useState("");
 
+
+  
 
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
   e.preventDefault();
+  if (!turnstileToken) {
+    toast.error("Please verify that you are not a robot");
+    return;
+  }
+
   setSending(true);
 
   if (!formRef.current)  {
@@ -95,10 +105,12 @@ export default function Contact() {
 
   emailjs
     .sendForm(
-      "service_2utkbp4",
-      "template_hwqhyou",
+
+      import.meta.env.VITE_EMAILJS_SERVICE_ID,// serevice id
+      import.meta.env.VITE_EMAILJS_TEMPLATE_ID, // tempalte id
       formRef.current,
-      "qzi8WBVMJEZeAFMd7"
+      import.meta.env.VITE_EMAILJS_PUBLIC_KEY// public key
+
     )
     .then(() => {
       setSending(false);
@@ -302,7 +314,21 @@ export default function Contact() {
                       onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.08)')}
                     />
                   </div>
-                  <motion.button
+
+{typeof window !== "undefined" && (
+                  <Turnstile
+                  siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
+                  onSuccess={(token) => setTurnstileToken(token)}
+                  onExpire={() => setTurnstileToken("")}
+                />
+                )}
+                {!turnstileToken && (
+                  <p className="text-xs text-gray-500">
+                    Please verify you are not a robot
+                  </p>
+                )}
+
+                  {/* <motion.button
                     type="submit"
                     disabled={sending}
                     whileHover={{ scale: 1.01, boxShadow: '0 8px 30px rgba(79,255,176,0.25)' }}
@@ -310,7 +336,21 @@ export default function Contact() {
                     transition={{ type: 'spring', stiffness: 400, damping: 20 }}
                     className="flex items-center justify-center gap-3 py-3.5 rounded-xl text-sm font-semibold text-black transition-all duration-200"
                     style={{ background: sending ? 'rgba(79,255,176,0.5)' : '#4fffb0' }}
-                  >
+                  > */}
+                  <motion.button
+  type="submit"
+  disabled={sending || !turnstileToken}
+  whileHover={{ scale: 1.01, boxShadow: '0 8px 30px rgba(79,255,176,0.25)' }}
+  whileTap={{ scale: 0.99 }}
+  className="flex items-center justify-center gap-3 py-3.5 rounded-xl text-sm font-semibold text-black transition-all duration-200"
+  style={{
+    background:
+      sending || !turnstileToken
+        ? 'rgba(79,255,176,0.3)'
+        : '#4fffb0',
+    cursor: sending || !turnstileToken ? 'not-allowed' : 'pointer',
+  }}
+>
                     {sending ? (
                       <>
                         <motion.div

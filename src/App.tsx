@@ -18,6 +18,7 @@ import Blogs from './components/pages/blogs/Blogs';
 import { Github, Linkedin, Rss, Mail, Twitter } from "lucide-react";
 import BlogPost from './components/pages/blogs/BlogPost';
 import ClickSpark from './components/ClickSpark';
+import NotFound from './components/pages/404/NotFound';
 
 function Footer() {
   return (
@@ -235,7 +236,7 @@ export default function App() {
              {/* BLOG PAGES */}
             <Route path="/blogs" element={<Blogs />} />
             <Route path="/blogs/:slug" element={<BlogPost />} />
-
+            <Route path="*" element={<NotFound />} />
 
           </Routes>
          

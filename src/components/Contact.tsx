@@ -1,6 +1,8 @@
 import { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Send, Github, Linkedin, Mail, MapPin, Phone } from 'lucide-react';
+import emailjs from "@emailjs/browser";
+import toast from 'react-hot-toast';
 
 const socials = [
   {
@@ -56,20 +58,65 @@ const itemVariants = {
 };
 
 export default function Contact() {
+
+
+  // email variables
+  type FormState = {
+  name: string;
+  email: string;
+  message: string;
+};
+
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: '-80px' });
-  const [formState, setFormState] = useState({ name: '', email: '', message: '' });
+  // for email 
+  const [formState, setFormState] = useState<FormState>({
+    name: "",
+    email: "",
+    message: "",
+  });
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setSending(true);
-    await new Promise(r => setTimeout(r, 1500));
-    setSending(false);
-    setSent(true);
-    setFormState({ name: '', email: '', message: '' });
-  };
+  const formRef = useRef<HTMLFormElement | null>(null);
+  
+
+
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+  setSending(true);
+
+  if (!formRef.current)  {
+  setSending(false);
+  toast.error("Form error");
+  return;
+  }
+
+  emailjs
+    .sendForm(
+      "service_2utkbp4",
+      "template_hwqhyou",
+      formRef.current,
+      "qzi8WBVMJEZeAFMd7"
+    )
+    .then(() => {
+      setSending(false);
+      setSent(true);
+      toast.success("Thanks for reaching out! I'll reply soon.");
+      setFormState({
+        name: "",
+        email: "",
+        message: "",
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+      setSending(false);
+      toast.error("Operation Failed");
+
+    });
+};
 
   return (
     <section id="contact" className="relative py-32 pb-40">
@@ -203,12 +250,13 @@ export default function Contact() {
                   </button>
                 </motion.div>
               ) : (
-                <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+                <form ref={formRef}  onSubmit={handleSubmit} className="flex flex-col gap-5">
                   <div>
                     <label className="block text-xs font-medium text-gray-400 mb-2 tracking-wide">
                       Your Name
                     </label>
                     <input
+                     name="from_name"
                       type="text"
                       value={formState.name}
                       onChange={e => setFormState(p => ({ ...p, name: e.target.value }))}
@@ -225,6 +273,7 @@ export default function Contact() {
                       Email Address
                     </label>
                     <input
+                    name="from_email"
                       type="email"
                       value={formState.email}
                       onChange={e => setFormState(p => ({ ...p, email: e.target.value }))}
@@ -241,6 +290,7 @@ export default function Contact() {
                       Message
                     </label>
                     <textarea
+                    name="message"
                       value={formState.message}
                       onChange={e => setFormState(p => ({ ...p, message: e.target.value }))}
                       required

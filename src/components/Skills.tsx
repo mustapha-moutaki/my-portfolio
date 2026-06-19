@@ -14,6 +14,7 @@ import {
   Database, Boxes, Workflow, FastForward, Server
 } from 'lucide-react';
 import { FaAws, FaJava } from "react-icons/fa6"; 
+import ClickSpark from './ClickSpark';
 
 
 interface SkillItem {
@@ -159,6 +160,7 @@ function SkillCard({ skill }: { skill: SkillItem }) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
+    
     <motion.div
       variants={cardVariants}
       whileHover={{ y: -6, scale: 1.07 }}
@@ -172,6 +174,14 @@ function SkillCard({ skill }: { skill: SkillItem }) {
         boxShadow: '0 2px 12px rgba(0,0,0,0.18)',
       }}
     >
+       <ClickSpark
+  sparkColor="#ffffff"
+  sparkSize={10}
+  sparkRadius={15}
+  sparkCount={8}
+  duration={400}
+>
+     
       <div
         className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
         style={{ boxShadow: `0 0 24px ${skill.color}38` }}
@@ -185,7 +195,9 @@ function SkillCard({ skill }: { skill: SkillItem }) {
       >
         {isHovered && skill.hoverName ? skill.hoverName : skill.name}
       </span>
+      </ClickSpark>
     </motion.div>
+    
   );
 }
 

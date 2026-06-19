@@ -17,6 +17,7 @@ import { Route, Routes } from 'react-router-dom';
 import Blogs from './components/pages/blogs/Blogs';
 import { Github, Linkedin, Rss, Mail, Twitter } from "lucide-react";
 import BlogPost from './components/pages/blogs/BlogPost';
+import ClickSpark from './components/ClickSpark';
 
 function Footer() {
   return (
@@ -24,6 +25,13 @@ function Footer() {
       className="py-16 border-t"
       style={{ borderColor: "rgba(255,255,255,0.06)" }}
     >
+       < ClickSpark
+                             sparkColor="#ffffff"
+                             sparkSize={10}
+                             sparkRadius={15}
+                             sparkCount={8}
+                             duration={400}
+                           >
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         {/* Top section: bio + link columns */}
         <div className="flex flex-col lg:flex-row justify-between gap-12 lg:gap-6">
@@ -170,6 +178,7 @@ function Footer() {
           </p>
         </div>
       </div>
+      </ClickSpark>
     </footer>
     
   );

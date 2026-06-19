@@ -1,6 +1,7 @@
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { useRef, useState } from 'react';
 import { GraduationCap, Award, X, ExternalLink, Download } from 'lucide-react';
+import ClickSpark from './ClickSpark';
 
 const education = [
   {
@@ -194,6 +195,8 @@ export default function Education() {
 
               {/* View All Button */}
               {hasMore && (
+            
+                 
                 <motion.button
                   variants={itemVariants}
                   whileHover={{ scale: 1.02, backgroundColor: 'rgba(255,255,255,0.05)' }}
@@ -201,9 +204,18 @@ export default function Education() {
                   onClick={() => setIsModalOpen(true)}
                   className="w-full py-4 rounded-2xl border border-dashed border-gray-800 text-gray-400 text-xs font-semibold uppercase tracking-widest flex items-center justify-center gap-2 transition-colors"
                 >
+
+                  
+                
                   View All Certifications
+                 
                   <ExternalLink size={14} />
+                  
                 </motion.button>
+                
+                
+                
+              
               )}
             </div>
           </motion.div>

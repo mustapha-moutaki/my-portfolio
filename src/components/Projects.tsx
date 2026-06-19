@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { ArrowUpRight, Github } from 'lucide-react';
+import ClickSpark from './ClickSpark';
 
 const projects = [
   {
@@ -74,6 +75,7 @@ function ProjectCard({ project }: { project: typeof projects[0] }) {
           className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3"
           style={{ background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(4px)' }}
         >
+          
           <motion.a
             href="#"
             whileHover={{ scale: 1.1 }}
@@ -81,9 +83,17 @@ function ProjectCard({ project }: { project: typeof projects[0] }) {
             className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-black"
             style={{ background: project.accent }}
           >
+            
+                  <span>
+                    
+                  </span>
             <ArrowUpRight size={14} strokeWidth={2.5} />
             Live Demo
+        
           </motion.a>
+           
+
+           
           <motion.a
             href="https://github.com/mustapha-moutaki"
             target="_blank"
@@ -93,9 +103,13 @@ function ProjectCard({ project }: { project: typeof projects[0] }) {
             className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium text-white"
             style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)' }}
           >
+
             <Github size={14} strokeWidth={2} />
             Code
+
+           
           </motion.a>
+         
         </div>
 
         {/* Period badge */}

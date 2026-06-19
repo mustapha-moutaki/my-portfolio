@@ -3,6 +3,7 @@ import { useRef } from 'react';
 import { Briefcase, ArrowUpRight } from 'lucide-react';
 // Assuming ScrollReveal is in the same directory or adjust the path accordingly
 import ScrollReveal from './ScrollReveal';
+import ClickSpark from './ClickSpark';
 
 const experiences = [
   {
@@ -51,6 +52,7 @@ export default function Experience() {
 
   return (
     <section id="experience" className="relative py-32">
+        
       {/* Background Glow */}
       <div
         className="absolute bottom-0 left-0 w-96 h-96 rounded-full opacity-10 pointer-events-none"
@@ -64,10 +66,12 @@ export default function Experience() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
+         
             <div className="section-divider mb-4" />
             <span className="text-xs font-semibold tracking-[0.2em] uppercase" style={{ color: '#4fffb0' }}>
               Career
             </span>
+         
           </motion.div>
 
           {/* Title with GSAP Scroll Reveal */}
@@ -107,6 +111,13 @@ export default function Experience() {
           />
 
           <div className="space-y-6">
+             <ClickSpark
+        sparkColor="#ffffff"
+        sparkSize={10}
+        sparkRadius={15}
+        sparkCount={8}
+        duration={400}
+      >
             {experiences.map((exp, i) => (
               <motion.div
                 key={i}
@@ -207,10 +218,14 @@ export default function Experience() {
                   </div>
                 </motion.div>
               </motion.div>
-            ))}
+            )
+            
+            )}
+            </ClickSpark>
           </div>
         </motion.div>
       </div>
+  
     </section>
   );
 }

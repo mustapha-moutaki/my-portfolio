@@ -95,6 +95,10 @@ export default function Contact() {
     return;
   }
 
+  if (formState.email.toLowerCase().trim() === "mustaphaamoutaki@gmail.com") {
+    toast.error("That's my email! (Smart idea u got), but please use your own so I can reply to you.");
+        return;
+  }
   setSending(true);
 
   if (!formRef.current)  {

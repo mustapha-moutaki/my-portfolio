@@ -51,12 +51,12 @@ function Footer() {
               <p className="text-sm text-gray-500 mb-4">Me</p>
               <ul className="space-y-3">
                 <li>
-                  <a href="/projects" className="text-sm text-white hover:text-[#4fffb0] transition-colors">
+                  <a href="#projects" className="text-sm text-white hover:text-[#4fffb0] transition-colors">
                     Projects
                   </a>
                 </li>
                 <li>
-                  <a href="/blog" className="text-sm text-white hover:text-[#4fffb0] transition-colors">
+                  <a href="blogs" className="text-sm text-white hover:text-[#4fffb0] transition-colors">
                     Blog
                   </a>
                 </li>
@@ -99,7 +99,7 @@ function Footer() {
               <ul className="space-y-3">
                 <li>
                   <a
-                    href="https://linkedin.com/in/mustapha-moutaki"
+                    href="https://www.linkedin.com/in/mustapha-moutaki-6528a2242/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-sm text-white hover:text-[#4fffb0] transition-colors inline-flex items-center gap-1"
@@ -135,7 +135,7 @@ function Footer() {
             <Github size={18} />
           </a>
           <a
-            href="https://linkedin.com/in/mustapha-moutaki"
+            href="https://www.linkedin.com/in/mustapha-moutaki-6528a2242/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-gray-500 hover:text-white transition-colors"

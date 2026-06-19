@@ -11,6 +11,7 @@ import Education from './components/Education';
 import Blog from './components/Blog';
 import Contact from './components/Contact';
 import CustomCursor from './components/CustomCursor';
+import { Toaster } from 'react-hot-toast';
 
 function Footer() {
   return (
@@ -40,6 +41,7 @@ export default function App() {
 
   return (
     <div className="relative bg-bg min-h-screen">
+      <Toaster position="top-right" />
       <CustomCursor />
       <AnimatePresence>
         <motion.div

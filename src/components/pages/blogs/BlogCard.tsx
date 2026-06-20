@@ -59,8 +59,14 @@ export default function BlogCard({ post, index }: BlogCardProps) {
             {post.excerpt}
           </p>
 
-          <span className="inline-flex items-center gap-1.5 text-sm font-medium text-white/90 group-hover:text-[#4FFEB0] transition-colors duration-300">
-            Read blog
+          <span className="inline-flex items-center gap-1.5 text-sm font-medium text-white/90 group-hover:text-[#4ffeb0] transition-colors duration-300">
+           
+                  Read more about
+          
+        
+ <span className="text-[#4ffeb0]">
+             {post.title.length > 20 ? post.title.slice(0, 20) + "..." : post.title} 
+               </span>
             <ArrowUpRight
               size={15}
               className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"

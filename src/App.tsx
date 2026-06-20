@@ -53,17 +53,26 @@ function Footer() {
               <p className="text-sm text-gray-500 mb-4">Me</p>
               <ul className="space-y-3">
                 <li>
-                  <a href="#projects" className="text-sm text-white hover:text-[#4fffb0] transition-colors">
+                  <a href="#projects"
+                    aria-label="Projects"
+                    title="Projects"
+                  className="text-sm text-white hover:text-[#4fffb0] transition-colors">
                     Projects
                   </a>
                 </li>
                 <li>
-                  <a href="blogs" className="text-sm text-white hover:text-[#4fffb0] transition-colors">
+                  <a href="blogs"
+                   aria-label="blog"
+                    title="blog"
+                  className="text-sm text-white hover:text-[#4fffb0] transition-colors">
                     Blog
                   </a>
                 </li>
                 <li>
-                  <a href="/bookmarks" className="text-sm text-white hover:text-[#4fffb0] transition-colors">
+                  <a href="/bookmarks"
+                   aria-label="bookmarks"
+                    title="bookmarks"
+                  className="text-sm text-white hover:text-[#4fffb0] transition-colors">
                     Bookmarks
                   </a>
                 </li>
@@ -74,18 +83,26 @@ function Footer() {
               <p className="text-sm text-gray-500 mb-4">This site</p>
               <ul className="space-y-3">
                 <li>
-                  <a href="/analytics" className="text-sm text-white hover:text-[#4fffb0] transition-colors">
+                  <a href="/analytics"
+                     aria-label="analytics"
+                    title="analytics"
+                  className="text-sm text-white hover:text-[#4fffb0] transition-colors">
                     Analytics
                   </a>
                 </li>
                 <li>
-                  <a href="/rss" className="text-sm text-white hover:text-[#4fffb0] transition-colors">
+                  <a href="/rss"
+                     aria-label="rss"
+                    title="rss"
+                  className="text-sm text-white hover:text-[#4fffb0] transition-colors">
                     RSS
                   </a>
                 </li>
                 <li>
                   <a
                     href="https://github.com/mustapha-moutaki/portfolio"
+                    aria-label="https://github.com/mustapha-moutaki/portfolio"
+                    title="https://github.com/mustapha-moutaki/portfolio"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-sm text-white hover:text-[#4fffb0] transition-colors"

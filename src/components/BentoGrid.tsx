@@ -548,6 +548,8 @@ export default function BentoGrid() {
           {/* Card 5: Discover more projects */}
           <motion.a
             href="#projects"
+            aria-label="Projects"
+            title="Projects"
             variants={cardVariants}
             whileHover={{ scale: 1.02, y: -3, boxShadow: '0 12px 40px rgba(79,255,176,0.12)' }}
             whileTap={{ scale: 0.98 }}

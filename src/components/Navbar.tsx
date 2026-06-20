@@ -78,21 +78,23 @@ className="fixed bottom-8 left-0 right-0 z-50 flex justify-center"    >
                 )}
               </AnimatePresence>
 
-             <motion.button
-  onClick={() => {
-    if (item.id === 'cv') {
-      window.open('https://collection.cloudinary.com/df1wxfrxu/ecfeb2b6688417e0a272cb0973630d39', '_blank');
-    } else {
-      scrollTo(item.id);
-    }
-  }}
+             <motion.a
+  href={item.id === 'cv'
+    ? 'https://collection.cloudinary.com/df1wxfrxu/ecfeb2b6688417e0a272cb0973630d39'
+    : `#${item.id}`
+  }
+  target={item.id === 'cv' ? '_blank' : undefined}
   whileHover={{ scale: 1.15, y: -3 }}
   whileTap={{ scale: 0.95 }}
   transition={{ type: 'spring', stiffness: 400, damping: 20 }}
   className="relative flex items-center justify-center w-10 h-10 rounded-xl transition-colors duration-200"
   style={{
-    background: isActive ? 'rgba(79, 255, 176, 0.15)' : 'rgba(255, 255, 255, 0.04)',
-    border: isActive ? '1px solid rgba(79, 255, 176, 0.3)' : '1px solid transparent',
+    background: isActive
+      ? 'rgba(79, 255, 176, 0.15)'
+      : 'rgba(255, 255, 255, 0.04)',
+    border: isActive
+      ? '1px solid rgba(79, 255, 176, 0.3)'
+      : '1px solid transparent',
   }}
 >
   <Icon
@@ -100,6 +102,7 @@ className="fixed bottom-8 left-0 right-0 z-50 flex justify-center"    >
     style={{ color: isActive ? '#4fffb0' : '#666' }}
     strokeWidth={1.8}
   />
+
   {isActive && (
     <motion.span
       layoutId="dock-indicator"
@@ -107,7 +110,7 @@ className="fixed bottom-8 left-0 right-0 z-50 flex justify-center"    >
       style={{ background: '#4fffb0' }}
     />
   )}
-</motion.button>
+</motion.a>
             </div>
           );
         })}

@@ -2,6 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Calendar, Clock, ArrowLeft, Tag, Share2 } from "lucide-react";
 import { posts } from "../../../data/BlogsData";
+import { Helmet } from "react-helmet-async";
 
 export default function BlogPost() {
   const { slug } = useParams();
@@ -19,6 +20,22 @@ export default function BlogPost() {
   }
 
   return (
+    <>
+
+    <Helmet>
+  <title>{post.title}</title>
+
+  <meta
+    name="description"
+    content={post.excerpt}
+  />
+
+  <link
+    rel="canonical"
+    href={`https://moutaki.tech/blog/${post.slug}`}
+  />
+</Helmet>
+
     <div className="min-h-screen bg-[#090909] text-white pb-20">
       {/* Background Glow */}
       <div className="fixed inset-0 pointer-events-none">
@@ -150,5 +167,6 @@ export default function BlogPost() {
         </footer>
       </main>
     </div>
+    </>
   );
 }

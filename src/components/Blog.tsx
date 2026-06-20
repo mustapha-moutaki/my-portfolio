@@ -140,7 +140,9 @@ export default function Blog() {
                       whileHover={{ x: 3 }}
                       transition={{ type: 'spring', stiffness: 400 }}
                     >
-                      Read more
+                       <a href={`/blogs/${post.slug}`}>
+                        Read article
+                      </a>
                       <ArrowRight size={13} strokeWidth={2.5} />
                     </motion.div>
                     </Link>

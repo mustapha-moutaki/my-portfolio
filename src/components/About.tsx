@@ -209,7 +209,7 @@ function ProfileImage() {
       onMouseLeave={handleMouseLeave}
     >
       <img
-        src="https://res.cloudinary.com/df1wxfrxu/image/upload/v1781717901/pic1_p6mosa.png"
+        src="https://res.cloudinary.com/df1wxfrxu/image/upload/f_auto,q_auto,w_600/v1781717901/pic1_p6mosa.png"
         alt="Mustapha Moutaki — sketch portrait"
         className="w-full h-full object-cover"
         draggable={false}
@@ -224,7 +224,7 @@ function ProfileImage() {
         }}
       >
         <img
-          src="https://res.cloudinary.com/df1wxfrxu/image/upload/v1781717483/pic2_ovlqvn.png"
+          src="https://res.cloudinary.com/df1wxfrxu/image/upload/f_auto,q_auto,w_600/v1781717483/pic2_ovlqvn.png"
           alt="Mustapha Moutaki — pixel art portrait"
           className="w-full h-full object-cover"
           draggable={false}

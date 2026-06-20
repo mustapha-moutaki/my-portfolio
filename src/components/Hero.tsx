@@ -56,7 +56,7 @@ function HeroImage() {
     >
       {/* Base image — pic1 (sketch) */}
       <img
-        src="https://res.cloudinary.com/df1wxfrxu/image/upload/v1781717901/pic1_p6mosa.png"
+        src="https://res.cloudinary.com/df1wxfrxu/image/upload/f_auto,q_auto,w_600/v1781717901/pic1_p6mosa.png"
         alt="Mustapha Moutaki"
         className="absolute inset-0 w-full h-full object-cover"
         draggable={false}
@@ -75,7 +75,7 @@ function HeroImage() {
       >
         <img
           // src="https://res.cloudinary.com/df1wxfrxu/image/upload/v1781717901/pic2_ctfcys.png"
-          src="https://res.cloudinary.com/df1wxfrxu/image/upload/v1781717483/pic2_ovlqvn.png"
+          src="https://res.cloudinary.com/df1wxfrxu/image/upload/f_auto,q_auto,w_600/v1781717483/pic2_ovlqvn.png"
           alt="Mustapha Moutaki Reveal"
           className="w-full h-full object-cover"
           draggable={false}

@@ -19,6 +19,7 @@ import { Github, Linkedin, Rss, Mail, Twitter } from "lucide-react";
 import BlogPost from './components/pages/blogs/BlogPost';
 import ClickSpark from './components/ClickSpark';
 import NotFound from './components/pages/404/NotFound';
+import { HelmetProvider } from "react-helmet-async";
 
 function Footer() {
   return (
@@ -197,6 +198,7 @@ export default function App() {
   }, []);
 
   return (
+     <HelmetProvider>
     <div className="relative bg-bg min-h-screen">
       <Toaster position="top-right" />
       <CustomCursor />
@@ -244,5 +246,6 @@ export default function App() {
         </motion.div>
       </AnimatePresence>
     </div>
+    </HelmetProvider>
   );
 }

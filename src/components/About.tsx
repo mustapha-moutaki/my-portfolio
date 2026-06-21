@@ -233,7 +233,7 @@ function ProfileImage() {
       <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(to top, rgba(9,9,9,0.55) 0%, transparent 55%)' }} />
       <div className="absolute bottom-4 left-4 right-4 pointer-events-none" style={{ opacity: reveal.active ? 0 : 1, transition: 'opacity 0.3s ease' }}>
         <div className="px-3 py-2 rounded-xl text-xs font-medium text-white/80 text-center" style={{ background: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.1)' }}>
-          Hover to reveal
+          Hire me!
         </div>
       </div>
     </div>

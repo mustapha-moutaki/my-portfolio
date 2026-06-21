@@ -46,9 +46,12 @@ export default function Navbar() {
       initial={{ y: 80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ delay: 0.8, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-className="fixed bottom-8 left-0 right-0 z-50 flex justify-center"    >
+      className="fixed bottom-8 left-0 right-0 z-50 flex justify-center"    >
+
+
+
       <div
-  className="glass-dark rounded-2xl px-2 py-2 flex items-center justify-center gap-0.5"
+        className="glass-dark rounded-2xl px-2 py-2 flex items-center justify-center gap-0.5"
         style={{ boxShadow: '0 20px 60px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.08)' }}
       >
         {navItems.map((item) => {
@@ -78,39 +81,39 @@ className="fixed bottom-8 left-0 right-0 z-50 flex justify-center"    >
                 )}
               </AnimatePresence>
 
-             <motion.a
-  href={item.id === 'cv'
-    ? 'https://collection.cloudinary.com/df1wxfrxu/ecfeb2b6688417e0a272cb0973630d39'
-    : `#${item.id}`
-  }
-  target={item.id === 'cv' ? '_blank' : undefined}
-  whileHover={{ scale: 1.15, y: -3 }}
-  whileTap={{ scale: 0.95 }}
-  transition={{ type: 'spring', stiffness: 400, damping: 20 }}
-  className="relative flex items-center justify-center w-10 h-10 rounded-xl transition-colors duration-200"
-  style={{
-    background: isActive
-      ? 'rgba(79, 255, 176, 0.15)'
-      : 'rgba(255, 255, 255, 0.04)',
-    border: isActive
-      ? '1px solid rgba(79, 255, 176, 0.3)'
-      : '1px solid transparent',
-  }}
->
-  <Icon
-    size={16}
-    style={{ color: isActive ? '#4fffb0' : '#666' }}
-    strokeWidth={1.8}
-  />
+              <motion.a
+                href={item.id === 'cv'
+                  ? 'https://collection.cloudinary.com/df1wxfrxu/ecfeb2b6688417e0a272cb0973630d39'
+                  : `#${item.id}`
+                }
+                target={item.id === 'cv' ? '_blank' : undefined}
+                whileHover={{ scale: 1.15, y: -3 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+                className="relative flex items-center justify-center w-10 h-10 rounded-xl transition-colors duration-200"
+                style={{
+                  background: isActive
+                    ? 'rgba(79, 255, 176, 0.15)'
+                    : 'rgba(255, 255, 255, 0.04)',
+                  border: isActive
+                    ? '1px solid rgba(79, 255, 176, 0.3)'
+                    : '1px solid transparent',
+                }}
+              >
+                <Icon
+                  size={16}
+                  style={{ color: isActive ? '#4fffb0' : '#666' }}
+                  strokeWidth={1.8}
+                />
 
-  {isActive && (
-    <motion.span
-      layoutId="dock-indicator"
-      className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full"
-      style={{ background: '#4fffb0' }}
-    />
-  )}
-</motion.a>
+                {isActive && (
+                  <motion.span
+                    layoutId="dock-indicator"
+                    className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full"
+                    style={{ background: '#4fffb0' }}
+                  />
+                )}
+              </motion.a>
             </div>
           );
         })}

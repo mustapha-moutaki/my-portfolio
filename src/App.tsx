@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, lazy, Suspense } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -14,12 +14,13 @@ import CustomCursor from './components/CustomCursor';
 import { Toaster } from 'react-hot-toast';
 import { Route, Routes } from 'react-router-dom';
 // import BlogPost from './components/pages/blogs/BlogPost';
-import Blogs from './components/pages/blogs/Blogs';
 import { Github, Linkedin, Rss, Mail, Twitter } from "lucide-react";
-import BlogPost from './components/pages/blogs/BlogPost';
 import ClickSpark from './components/ClickSpark';
-import NotFound from './components/pages/404/NotFound';
 import { HelmetProvider } from "react-helmet-async";
+
+const Blogs = lazy(() => import('./components/pages/blogs/Blogs'));
+const BlogPost = lazy(() => import('./components/pages/blogs/BlogPost'));
+const NotFound = lazy(() => import('./components/pages/404/NotFound'));
 
 function Footer() {
   return (
@@ -229,6 +230,7 @@ export default function App() {
           
         
           
+          <Suspense fallback={null}>
           <Routes>
             <Route
             path="/"
@@ -258,6 +260,7 @@ export default function App() {
             <Route path="*" element={<NotFound />} />
 
           </Routes>
+          </Suspense>
          
           <Footer />
         </motion.div>

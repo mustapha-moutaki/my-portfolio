@@ -256,9 +256,9 @@ function CasablancaMap() {
       const L = (window as any).L;
       const el = document.getElementById('casablanca-map');
       if (!el || (el as any)._leaflet_id) return;
-
+      
       const map = L.map('casablanca-map', {
-        center: [33.5928, -7.6192],
+        center: [33.532194, -7.647750],
         zoom: 13,
         zoomControl: false,
         attributionControl: false,
@@ -266,9 +266,18 @@ function CasablancaMap() {
         dragging: false,
       });
 
-      L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-        maxZoom: 19,
-      }).addTo(map);
+      // L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+      //   maxZoom: 19,
+      // }).addTo(map);
+      L.tileLayer(
+  `https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png?key=${import.meta.env.VITE_CARTO_API_KEY}`,
+  {
+    maxZoom: 19,
+    subdomains: 'abcd',
+    attribution:
+      '&copy; OpenStreetMap contributors &copy; CARTO',
+  }
+).addTo(map);
 
       const zoomOut = L.Control.extend({
         options: { position: 'bottomleft' },
